@@ -2,6 +2,9 @@ Flake8 respect NOQA
 ===================
 
 By default, flake8 ignores ``# NOQA`` directives for some PEP8 errors.
+
+See https://gitlab.com/pycqa/flake8/issues/21
+
 This flake8 plugin makes it respect them.
 
 Installation

@@ -10,7 +10,7 @@ import pep8
 class RespectNoqaReport(pep8.StandardReport):
 
     def error(self, line_number, offset, text, check):
-        if pep8.noqa(self.lines[line_number - 1]):
+        if len(self.lines) > line_number - 1 and pep8.noqa(self.lines[line_number - 1]):
             return
         else:
             return super(RespectNoqaReport, self).error(line_number, offset,

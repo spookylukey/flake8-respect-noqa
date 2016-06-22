@@ -4,13 +4,17 @@ Always ignore lines with '# noqa'
 """
 __version__ = 0.2
 
-import pep8
+try:
+    from pep8 import StandardReport, noqa
+except ImportError:
+    # Try the new (as of 2016-June) pycodestyle package.
+    from pycodestyle import StandardReport, noqa
 
 
-class RespectNoqaReport(pep8.StandardReport):
+class RespectNoqaReport(StandardReport):
 
     def error(self, line_number, offset, text, check):
-        if len(self.lines) > line_number - 1 and pep8.noqa(self.lines[line_number - 1]):
+        if len(self.lines) > line_number - 1 and noqa(self.lines[line_number - 1]):
             return
         else:
             return super(RespectNoqaReport, self).error(line_number, offset,
